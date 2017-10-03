@@ -56,7 +56,7 @@ export default class Handler {
         let data = {};
         // check whether we are handling a form node or an
         // object literal
-        if (Object.prototype.isPrototypeOf(payload)) {
+        if (!(payload instanceof HTMLElement)) {
             data = {...payload};
         }
         else {
@@ -90,23 +90,41 @@ export default class Handler {
             // ach
             'routingNumber', 'accountNumber', 'accountType'
         ];
-        const fields = form.getElementsByTagName('input');
+        const fields = this.getFormFields(form);
         const paymentInstrument = {};
         const billingAddress = {};
+        const getValue = (field) => {
+            if (field.tagName.toLowerCase() === 'select') {
+                return field.options[field.selectedIndex].value
+            }
+            return field.value;
+        };
         fields.forEach(field => {
             if (field.hasAttribute(this.attrKey)) {
                 const prop = field.getAttribute(this.attrKey);
                 if (prop !== null && prop !== '') {
                     if (instrumentFields.includes(prop)) {
-                        paymentInstrument[prop] = field.value;
+                        paymentInstrument[prop] = getValue(field);
                     }
                     else {
-                        billingAddress[prop] = field.value;
+                        billingAddress[prop] = getValue(field);
                     }
                 }
             }
         });
         return {paymentInstrument, billingAddress};
+    }
+
+    /**
+     * Return an enumerable list of form elements that could contain field data.
+     * @param form {Node}
+     * @returns {Array}
+     */
+    getFormFields(form) {
+        return [
+            ...Array.from(form.getElementsByTagName('input')),
+            ...Array.from(form.getElementsByTagName('select'))
+        ]
     }
 
     /**
@@ -119,7 +137,7 @@ export default class Handler {
             method: 'post',
             body: JSON.stringify(data),
             uri: this.endpoint,
-            json: true,
+            //json: true,
             headers: {
                 'reb-auth': this.authorization
             }
@@ -133,19 +151,25 @@ export default class Handler {
      */
     handleResponse(callback) {
         return (error, response, body) => {
-            let params = {
+            const params = {
                 xhr: response.rawRequest,
                 status: response.statusCode,
                 error: false,
                 data: null,
                 message: 'success'
             };
+            // error prior to running the XHR request
             if (error) {
                 params.error = true;
                 params.message = error.message;
             }
             else {
-                params.data = body;
+                params.data = JSON.parse(body);
+                // check if the status code indicates an error
+                if (response.statusCode !== 201) {
+                    params.error = true;
+                    params.message = params.data.error;
+                }
             }
             callback(params);
         }
@@ -181,7 +205,7 @@ export default class Handler {
             const match = fields.some(field => map[method].includes(field));
             if (match && !data.method) {
                 data.method = method;
-                console.log(`Rebilly detected "${method}" payment method`);
+                console.log(`Rebilly detected "${method}" as the payment method`);
             }
         });
     }

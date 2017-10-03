@@ -11,8 +11,8 @@ export default function Rebilly({modules = []} = {}) {
     const handler = new Handler(config);
 
     return {
-        setEndpoint: handler.setEndpoint,
-        setAuth: handler.setEndpoint,
-        createToken: handler.setEndpoint
+        setEndpoint: (url) => handler.setEndpoint(url),
+        setAuth: (auth) => handler.setAuth(auth),
+        createToken: (payload, callback) => handler.createToken(payload, callback)
     };
 }
