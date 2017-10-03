@@ -41,9 +41,9 @@ describe('when creating a handler', () => {
         errorHandler({message: 'error'}, {rawRequest: 123, statusCode: 422}, null);
         const successHandler = handler.handleResponse((data) => {
             expect(data.error).to.be.equal(false);
-            expect(data.data).to.be.equal('hello world');
+            expect(data.data).to.be.deep.equal({hello: 'world'});
         });
-        successHandler(null, {rawRequest: 123, statusCode: 201}, 'hello world');
+        successHandler(null, {rawRequest: 123, statusCode: 201}, JSON.stringify({hello: 'world'}));
     });
 
     it('should convert legacy methods to their new equivalents', () => {
@@ -86,15 +86,21 @@ describe('when creating a handler', () => {
         expect(data.hello).to.be.equal('world');
     });
 
-    it('should not create a token if the authorization is missing', () => {
+    it('should not create a token if the authorization is missing', async () => {
         handler.setAuth(null);
-        const createToken = () => handler.createToken({}, () => {});
-        expect(createToken).to.throw('Missing Rebilly authorization value');
+        await handler.createToken({}, (data) => {
+            // callback should not run
+            expect(true).to.be.equal(false);
+        });
+        expect(true).to.be.equal(true);
     });
 
-    it('should not create a token if the payload is missing data', () => {
+    it('should not create a token if the payload is missing data', async () => {
         handler.setAuth('123456789');
-        const createToken = () => handler.createToken({bad: 'data'}, () => {});
-        expect(createToken).to.throw('Missing method and payment instrument data');
+        await handler.createToken({bad: 'data'}, () => {
+            // callback should not run
+            expect(true).to.be.equal(false);
+        });
+        expect(true).to.be.equal(true);
     });
 });

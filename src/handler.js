@@ -37,7 +37,7 @@ export default class Handler {
 
     /**
      * Set the authorization value to authenticate the API request used to generate the payment token.
-     * @param signature {string}
+     * @param signature {string|null}
      */
     setAuth(signature = null) {
         this.authorization = signature;
@@ -47,22 +47,31 @@ export default class Handler {
      * Create the token and return its value via the callback provided.
      * @param payload {Object|Node}
      * @param callback {}
-     * @returns {Promise.<void>}
+     * @returns {Promise.<void>|boolean}
      */
-    createToken(payload, callback) {
+    async createToken(payload, callback) {
         if (this.authorization === null) {
-            throw new Error('Missing Rebilly authorization value');
+            console.error('Missing Rebilly authorization value');
+            return false;
         }
         let data = {};
+        const isForm = (() => {
+            try {
+                return payload instanceof HTMLElement;
+            }
+            catch (err) {
+                return false;
+            }
+        })();
         // check whether we are handling a form node or an
         // object literal
-        if (!(payload instanceof HTMLElement)) {
+        if (!isForm) {
             data = {...payload};
         }
         else {
             data = this.serializeForm(payload);
         }
-        const moduleData = (async () => await this.processModules())();
+        const moduleData = await this.processModules();
         data = {...data, ...moduleData};
         // convert legacy method values if present
         if (data.method) {
@@ -73,7 +82,8 @@ export default class Handler {
             this.detectMethod(data);
         }
         else {
-            throw new Error('Missing method and payment instrument data');
+            console.error('Missing method and payment instrument data');
+            return false;
         }
         xhr(this.getConfig(data), this.handleResponse(callback))
     }

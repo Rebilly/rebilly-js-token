@@ -24,7 +24,6 @@ export default function leadSources() {
                 data[name] = value;
                 return data;
             }, {});
-
     }
     return {leadSource};
 }
