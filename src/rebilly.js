@@ -65,8 +65,11 @@ export default function Rebilly({modules = []} = {}) {
             convertLegacyMethods(data);
         }
         // or detect the method when not defined
-        else {
+        else if (data.paymentInstrument) {
             detectMethod(data);
+        }
+        else {
+            throw new Error('Missing method and payment instrument data');
         }
         xhr(getConfig(data), handleResponse(callback))
     }
@@ -77,17 +80,29 @@ export default function Rebilly({modules = []} = {}) {
      * @returns {Object}
      */
     function serializeForm(form) {
+        const instrumentFields = [
+            // payment card
+            'pan', 'expMonth', 'expYear', 'cvv',
+            // ach
+            'routingNumber', 'accountNumber', 'accountType'
+        ];
         const fields = form.getElementsByTagName('input');
-        let data = {};
+        const paymentInstrument = {};
+        const billingAddress = {};
         fields.forEach(field => {
             if (field.hasAttribute(attrKey)) {
                 const prop = field.getAttribute(attrKey);
                 if (prop !== null && prop !== '') {
-                    data[prop] = field.value;
+                    if (instrumentFields.includes(prop)) {
+                        paymentInstrument[prop] = field.value;
+                    }
+                    else {
+                        billingAddress[prop] = field.value;
+                    }
                 }
             }
         });
-        return data;
+        return {paymentInstrument, billingAddress};
     }
 
     /**
@@ -157,7 +172,7 @@ export default function Rebilly({modules = []} = {}) {
             'payment-card': ['pan', 'expMonth', 'expYear', 'cvv'],
             'ach': ['routingNumber', 'accountNumber', 'accountType']
         };
-        const fields = Object.keys(data);
+        const fields = Object.keys(data.paymentInstrument);
         Object.keys(map).forEach(method => {
             const match = fields.some(field => map[method].includes(field));
             if (match && !data.method) {

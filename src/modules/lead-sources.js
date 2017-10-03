@@ -6,10 +6,13 @@ export default function leadSources() {
         'utm_term',
         'utm_content',
     ];
+    const prefix = 'utm_';
+    let leadSource = null;
+
     if (window) {
         const query = window.location.search.replace('?', '');
         const fields = query.split('&');
-        return fields
+        leadSource = fields
             .map(field => field.split('='))
             .filter(field => {
                 const [name] = field;
@@ -17,10 +20,11 @@ export default function leadSources() {
             })
             .reduce((data, field) => {
                 let [name, value = null] = field;
-                name = name.replace('utm_', '');
+                name = name.replace(prefix, '');
                 data[name] = value;
                 return data;
             }, {});
+
     }
-    return {};
+    return {leadSource};
 }
