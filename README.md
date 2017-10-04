@@ -2,6 +2,9 @@
 
 Rebilly.js powers your checkout form and removes the need to send sensitive customer information directly to your servers. Use the library to generate payment tokens to reduce the scope of PCI DSS compliance.
 
+### Rebilly API Spec
+The library uses the payment token endpoint from the Rebilly API. See the [Rebilly API spec](https://rebilly.github.io/RebillyAPI/) for more details.
+
 ## Including Rebilly.js
 
 Add Rebilly.js to your page using one of the following CDN providers, preferably at the bottom before the `</body>`. 
@@ -67,7 +70,7 @@ Using the form above the library will detect a payment card.
 
 ```js
 var form = document.getElementsByTagName('form')[0];
-Rebilly.create(form, callback);
+Rebilly.createToken(form, callback);
 ```
 
 ##### Use an object literal
@@ -81,26 +84,26 @@ var payload = {
         cvv: '123'
     }
 };
-Rebilly.create(payload, callback);
+Rebilly.createToken(payload, callback);
 ```
 
 ##### Define the callback
 The callback function should be used to inject the token returned by the API into your form. Once submitted, use the value in conjunction with one of the server-side SDKs to create the customer.
 
 ```js
-// the token is returned as data.id
-var callback = function (data) {
+// the token is returned as response.data.id
+var callback = function (response) {
     // create a hidden input field
     var tokenField = document.createElement('input');
     tokenField.setAttribute('type', 'hidden');
     tokenField.setAttribute('name', 'payment-token');
-    tokenField.value = data.id;
+    tokenField.value = response.data.id;
     // append to the form and submit to the server
     form.appendChild(tokenField);
     form.submit();
 };
 
-Rebilly.create(form, callback);
+Rebilly.createToken(form, callback);
 ```
 
 ##### Callback Argument 
