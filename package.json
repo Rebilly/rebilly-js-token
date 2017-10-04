@@ -22,6 +22,9 @@
     "payment",
     "card"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "Andrei Moldoveanu",
   "license": "MIT",
   "bugs": {

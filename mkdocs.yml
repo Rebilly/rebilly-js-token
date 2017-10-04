@@ -1,0 +1,42 @@
+#project information
+site_name: Rebilly JS Token
+site_description: Official Rebilly JS Token Documentation
+site_favicon: 'images/favicon.ico'
+
+#theme
+theme: 'material'
+extra_css:
+  - 'styles/extra.css'
+
+extra:
+  palette:
+    primary: 'indigo'
+    accent: 'deep purple'
+
+#repo information
+repo_name: 'Rebilly JS Token'
+repo_url: 'https://github.com/Rebilly/rebilly-js-token'
+
+# Copyright
+copyright: 'Copyright &copy; 2017 Rebilly Inc.'
+
+#extensions
+markdown_extensions:
+  - admonition
+  - codehilite
+  - meta
+  - toc(permalink=true)
+  - attr_list
+  - pymdownx.inlinehilite
+  - pymdownx.critic
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.superfences
+  - pymdownx.mark
+  - pymdownx.snippets(base_path=docs)
+  #  - pymdownx.smartsymbols
+
+#page tree
+pages:
+  - Introduction: index.md
+  - License: license.md
+
