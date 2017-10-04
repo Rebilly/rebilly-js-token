@@ -1,5 +1,5 @@
 #project information
-site_name: Rebilly JS Token
+site_name: Rebilly JS Token Library
 site_description: Official Rebilly JS Token Documentation
 site_favicon: 'images/favicon.ico'
 
@@ -38,5 +38,6 @@ markdown_extensions:
 #page tree
 pages:
   - Introduction: index.md
+  - Getting Started: getting-started.md
   - License: license.md
 
