@@ -1,0 +1,41 @@
+language: node_js
+node_js:
+  - '7'
+cache:
+  pip: true
+  yarn: true
+  directories:
+    - node_modules
+
+env:
+  global:
+    secure: U184pgt0XxlA45A3PWAbXbEV68rUSnCjFh+D5rbfAm5glZydgwBdSU3sFmhIpL22+N+8fj03/mA/qRyVlR5cAEkcLy9xpVyHiJerefS7L3AGF5G0R7e9x7oGwtxwUmyVal8Y2D6sf88uaxVPylwP4o7Pck5XzCGKWS9pK0QW3x5eKOzmIScDKGgp+nBD2tPpSxSEElDVTx9dcD1cfeBfV/IYvqWQ2jDZH5AUjKGZODY71g2D7QN2fNZGiThO//SIbrQTiZuP7T6NGPkfbyWoyxfKgyZ/j3tbvRwjap+/uoZoSzvGq3RTRIANt4lqakWNG+jl3OahoUgvSTsRQ+dLi3hGe4WMr5L3e4UUZh31v2GwR1fnptDUuFFYY+biDL9nYp7U5KOMFe6+hWfglKvkSKHNpJZeQhWW0gry1XnyVCTmHhguxLRpQ7f6Thn5OkC4SXeTkGXIYxhyEutgKB+eSyBkbg/jpn6F/6DUs4TVu8X2A7AlWF1qVlrZqwzvm6D3PVganYaAfKEybsv3axq5NNULy4fo/WkcAT1i0xB4/nSOHNHsx1PU0sjVtyE3KoP3Tg/GPiooY65gDyU2szv7AheQTjolJmzeG/cguqGBn8Y0H0nFDZNxKPKhBZBIZkY0riXRjEUOk+FzOE9/bHMZrkxdgxP0lDh1URHScDTcabo=
+
+branches:
+  only:
+    - master
+    - "/^v\\d+\\./"
+install:
+  - yarn install
+  - pip install --user -r doc-req.txt
+
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: andrei.moldoveanu@gmail.com
+  api_key:
+    secure: ylVbKkQbTdum+b+eDGbd3CenUoz8bDycNruoTIySMfXZyBezAGoLN7fHNK+YgoAagJ1hP+D9u3DEl/c7eG7jqCgQpOkJzlfm7miBm5ykZMPIzrP2jIUcoMC5Ffs49tt0Ghx5ATjN8Fgk9Zgk2gpl1KvCXXQ/DTnNtTVBqK9aJdkMQ+uKGHxUiJ/nHhbst0FWwHmmmT8zJdpzOkkOx2l9G6Wjs/MWOCI7Gfv/Wl4T79uJXM7t9fppE2K35FuZC7dOT9fom+DVm6auzpRz40HHFW/7hVwFrXTW8xP5uHlXqXtMUqiMGukOJs+K6oIxQ14LPLOCEtisaQCxKA34NAJV15XyVUZEbt/uh+BwKZPDXF+borHmvWo5Mu5AktKd5g1Bydvu6nHdZipdW9NG8C/oZb5EsEeWXlLpYH2OPTA/ylzO848hb6CaylgbiOZNzjH8UikC7WGg0GKOuKjzgWyv9Di21GWDKIki8xyGfaBuK1YTjarwBuDTI8uhJ3WXIldCCyYG7cSSIeojSOM4P6AHgHEOwSwaVTZ1crH5F/0/wDFeZ4iDqL08qRDt4yjggoyCz/hmC9GDzBCuHoafxzoRZ6NnQZ2sgdhHRsTorDIQqJIV0rpfCNgwCtGzBM/PNV/XnfRF5lphWrnK7gFwESKIB8Ml2bAIACgD8ViVHqBVrmE=
+  on:
+    tags: true
+
+after_deploy:
+  - git config user.name "Andrei Moldoveanu"
+  - git config user.email "andrei.moldoveanu@gmail.com"
+  - git remote add gh-token "https://${GH_TOKEN}@github.com/Rebilly/rebilly-js-token.git";
+  - git fetch gh-token;
+  - git fetch gh-token gh-pages:gh-pages;
+  - mkdocs gh-deploy -v --clean --remote-name gh-token;
+
+notifications:
+  slack:
+    secure: QRXPaZ/Y82UVkG4itL02lRseApv/NpvFaotDeRKGuaxq9YL4tluhiu4dsdrP+2hlID7iuMEEKdI1+O2XyZ5msEE66RWNbBtVWX+FgNuCLoj+Iv00jurhRq14famsZumDvmcDwMHmpXjSS361R9L2sJLVrJY/oyERyv1p8wKoA0SwzNUS3c136ht2kiVysRd4RrsEcJWvdiwUI4QWMaNPuhdYDpfYjXHVSt0hd6mFFl1zu9KNpp/aA9cHjl7mVruI+hASb29Wb8kwtb0p8d1Ol62+Lk8/+yQe7BPoLd6bWGbZ/LSzS4S3yQpfXzBhEs8wQmJki+rp/OMVL5bUCUcMvi1/GODLPFoVzdql2sp5c1Vf2LviwhwxJASu2Hu7/3VNxXE0TpGrZs5rQsEJiInzjX1mfkJINGoDLYA+H4yQxUqgqRUULkPtopuUkmW5GT8SDPCTvEyafRFW5KHEEzCU7f99xM40/yw39DRs1XIdVvg2fBRX84IbV9dtWBk24XAVFxFesKBZQgN83JPjB2uDXm+6gtkT/uLPbWnRNP9YSOuwEG8w711Z7brdSNhFh/SasYwK26liX2/BykAU9A2pQnqKgKtoE58akV0MuuRbs0vl80dyO4eX4ei79vz410s3bnVAsgWnSNM+XE2j/aLBWobNpeB3m23Ml28osDsrQgQ=
