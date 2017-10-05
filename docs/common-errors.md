@@ -3,7 +3,7 @@ The Rebilly JS Token library uses [CORS][goto-cors]{: target='_blank'} for trans
 
 ## Silent Error
 
-Your endpoint URL is incorrect. See the API endpoint topic on how to set a new endpoint. Contact us if you are unsure about which URL to use.
+Your endpoint URL is incorrect. See the [endpoint topic][goto-endpoint] on how to set a new endpoint. Contact us if you are unsure about which URL to use.
 If the problem persists after changing the endpoint the error might be caused by [missing headers][goto-headers].
 
 !!! warning "Console Warning"
@@ -37,3 +37,4 @@ The following headers must be supported over your network:
 
 [goto-cors]: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 [goto-headers]: #missing-cors-headers
+[goto-endpoint]: /getting-started/#changing-the-endpoint

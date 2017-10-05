@@ -92,7 +92,7 @@ var payload = {
 Rebilly.createToken(payload, callback);
 ```
 
-### Define the callback
+### Defining the callback
 The callback function should be used to inject the token returned by the API into your form. Once submitted, use the value in conjunction with one of the server-side SDKs to create the customer.
 
 ```js
@@ -112,6 +112,7 @@ Rebilly.createToken(form, callback);
 ```
 
 **Callback Argument**
+
 The argument received by the callback contains additional information on the API request and can be used to detect validation errors.
 
 | Property | Type | Description |
@@ -121,6 +122,15 @@ The argument received by the callback contains additional information on the API
 | status | number | The status code returned by the response. |
 | data | Object | The response data as returned by the API. The token is exposed as `data.id`. |
 | xhr | Object | The raw XHR request object. |
+
+## Changing the endpoint
+You can change the default production endpoint URL for testing purposes via `:::js Rebilly.setEndpoint`. This must be done before the token is created to apply.
+
+```js
+// using the sandbox endpoint
+Rebilly.setEndpoint('https://api-sandbox.rebilly.com/v2.1/tokens');
+```
+
 
 ## Example Form
 When combined together the most basic version of the page would look like the following example:

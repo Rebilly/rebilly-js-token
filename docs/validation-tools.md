@@ -55,11 +55,11 @@ Rebilly.validate.card.expiry(22, 2022); // false
 Rebilly.validate.card.expiry(11, 2001); // false
 
 // digit as strings
-Rebilly.validate.card.expiry('01','2015'); // true
+Rebilly.validate.card.expiry('01','2035'); // true
 // digits as integers
-Rebilly.validate.card.expiry(1, 2014); // true
+Rebilly.validate.card.expiry(1, 2033); // true
 // mix of string and integer
-Rebilly.validate.card.expiry('04', 2014); // true
+Rebilly.validate.card.expiry('04', 2031); // true
 ```
 
 ### CVV

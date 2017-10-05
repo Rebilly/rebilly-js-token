@@ -20,9 +20,8 @@ module.exports = (env = {}) => {
                 new webpack.optimize.UglifyJsPlugin({
                     beautify: !isProd,
                     mangle: !isProd ? false : {
-                        //except: ['Collection', 'Member'],
                         screw_ie8: true,
-                        keep_fnames: true
+                        keep_fnames: false
                     },
                     compress: !isProd ? false : {
                         screw_ie8: true

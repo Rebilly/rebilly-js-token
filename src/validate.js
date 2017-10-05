@@ -11,10 +11,10 @@ const pL = /\u0041-\u005A\u0061-\u007A\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00
  * @param length {number}
  * @returns {boolean}
  */
-function validateString(str, pattern, length) {
+function validateString(str, pattern, length = 10) {
     const r = new RegExp(pattern);
     str = String(str).trim();
-    return str.length <= (length || 10) && r.test(str);
+    return str.length <= length && r.test(str);
 }
 
 /**
@@ -24,8 +24,8 @@ function validateString(str, pattern, length) {
  * @param length {number}
  * @returns {boolean}
  */
-function validateUnicodeString(str, extraPattern, length) {
-    return validateString(str, `^[${pL.source}${(extraPattern || '')}]+$`, length);
+function validateUnicodeString(str, extraPattern = '', length) {
+    return validateString(str, `^[${pL.source}${extraPattern}]+$`, length);
 }
 
 /**
@@ -154,8 +154,6 @@ const customer = {
 };
 
 const validate = {
-    string: validateString,
-    unicodeString: validateUnicodeString,
     card,
     customer
 };
