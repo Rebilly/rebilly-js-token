@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - '7'
+
 cache:
   pip: true
   yarn: true
@@ -15,6 +16,7 @@ branches:
   only:
     - master
     - "/^v\\d+\\./"
+
 install:
   - yarn install
   - pip install --user -r doc-req.txt
@@ -24,7 +26,7 @@ deploy:
   skip_cleanup: true
   email: andrei.moldoveanu@gmail.com
   api_key:
-    secure: ylVbKkQbTdum+b+eDGbd3CenUoz8bDycNruoTIySMfXZyBezAGoLN7fHNK+YgoAagJ1hP+D9u3DEl/c7eG7jqCgQpOkJzlfm7miBm5ykZMPIzrP2jIUcoMC5Ffs49tt0Ghx5ATjN8Fgk9Zgk2gpl1KvCXXQ/DTnNtTVBqK9aJdkMQ+uKGHxUiJ/nHhbst0FWwHmmmT8zJdpzOkkOx2l9G6Wjs/MWOCI7Gfv/Wl4T79uJXM7t9fppE2K35FuZC7dOT9fom+DVm6auzpRz40HHFW/7hVwFrXTW8xP5uHlXqXtMUqiMGukOJs+K6oIxQ14LPLOCEtisaQCxKA34NAJV15XyVUZEbt/uh+BwKZPDXF+borHmvWo5Mu5AktKd5g1Bydvu6nHdZipdW9NG8C/oZb5EsEeWXlLpYH2OPTA/ylzO848hb6CaylgbiOZNzjH8UikC7WGg0GKOuKjzgWyv9Di21GWDKIki8xyGfaBuK1YTjarwBuDTI8uhJ3WXIldCCyYG7cSSIeojSOM4P6AHgHEOwSwaVTZ1crH5F/0/wDFeZ4iDqL08qRDt4yjggoyCz/hmC9GDzBCuHoafxzoRZ6NnQZ2sgdhHRsTorDIQqJIV0rpfCNgwCtGzBM/PNV/XnfRF5lphWrnK7gFwESKIB8Ml2bAIACgD8ViVHqBVrmE=
+    secure: 5f0ffjj8S8Ca7eW5d+RqQLgkJ+3qqYX/CSNNw0QbZgLzqgVTQ5q9MQI0fbJb+my6ZLJL9MUnKp4lnWL+iXauPEducfyeHYCq4n1HESeWv8UqzA9CCKAiTX1igCit0wL49pD4J66rlig7Jf8JJvj5evAT0gLuMj2fu0ZFRlYPFQ958iuItG84/MOzDYQWDnbPjP32EYNUmb85/49j14+XCGMlVGuZ0M6a1/xh+YyUeAMP+ayg/J7e1waFjSB1Rgntq7FCaSwYIikaN0DVcjO9c3+lyjSYchrC4bx28BG5TuMkdTnP+4XenDevIqdiEduTjP0sRps3JBKad0OsngLyWatZQDJO6tPER3lN779BxLr4yxwkwGd6OtS50xdMFFaFNAUK0lPb9KBTL3B2xVQwP3sKtrdadhAxg3asWD6yXPG71ggKjbLmTJH5r+aCMb85lRR+++RP8G81A/8owfvIJq+n3QSP9Zgh3SzD6Bvz7gwxxmT8GeUHOYUUXMEZkPNnu4fQMoFGcHv3HhEtQDH8aUYLgBupU4T68HS++8g1x239x4YnvXGbZzrKo2HOMwQJSj7AVdOb0DM7QTUuKoE+uL2GziWqoKhWWw9syt79sXYoKie8airRG9PYjMcyvNtu66mseJf+fR0chSq+s3Cl8C2xW4gmVo6o89e8JSsgt6U=
   on:
     tags: true
 
