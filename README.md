@@ -10,6 +10,9 @@ Rebilly.js powers your checkout form and removes the need to send sensitive cust
 ### Rebilly API Spec
 The library uses the payment token endpoint from the Rebilly API. See the [Rebilly API spec](https://rebilly.github.io/RebillyAPI/) for more details.
 
+## Documentation
+Visit the [GitHub pages](https://rebilly.github.io/rebilly-js-token/) for detailed documentation.
+
 ## Including Rebilly.js
 
 Add Rebilly.js to your page using one of the following CDN providers, preferably at the bottom before the `</body>`. 

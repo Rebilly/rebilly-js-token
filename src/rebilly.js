@@ -1,4 +1,5 @@
 import Handler from './handler';
+import validate from './validate';
 
 /**
  * Generate a payment token creation handler with a set of modules
@@ -13,6 +14,7 @@ export default function Rebilly({modules = []} = {}) {
     return {
         setEndpoint: (url) => handler.setEndpoint(url),
         setAuth: (auth) => handler.setAuth(auth),
-        createToken: (payload, callback) => handler.createToken(payload, callback)
+        createToken: (payload, callback) => handler.createToken(payload, callback),
+        validate
     };
 }

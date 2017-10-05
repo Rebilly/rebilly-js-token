@@ -1,7 +1,7 @@
 import xhr from 'xhr';
 
 /**
- * Handler for the creation of a payment token using the Rebilly API.
+ * Handler for the creation of a payment token using the Rebilly API. Partially exposed by the main Rebilly factory.
  */
 export default class Handler {
     attrKey = 'data-rebilly';
@@ -46,7 +46,7 @@ export default class Handler {
     /**
      * Create the token and return its value via the callback provided.
      * @param payload {Object|Node}
-     * @param callback {}
+     * @param callback {Function}
      * @returns {Promise.<void>|boolean}
      */
     async createToken(payload, callback) {
