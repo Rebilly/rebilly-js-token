@@ -137,4 +137,4 @@ When combined together the most basic version of the page would look like the fo
 <script src="https://gist.github.com/Teknologica/6d814f041428e5255df07cd2c60d1334.js"></script>
 
 [goto-auth]: #Authentication
-[goto-generate]: #test
+[goto-generate]: generating-signature.md
