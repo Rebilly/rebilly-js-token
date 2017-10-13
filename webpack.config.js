@@ -5,12 +5,12 @@ module.exports = (env = {}) => {
     const isProd = env === 'prod';
     return [
         {
-            entry: ['./src/index.js'],
+            entry: ['babel-polyfill','./src/index.js'], //'babel-polyfill'
             output: {
                 path: path.resolve(__dirname, './dist'),
                 filename: 'rebilly.js',
-                library: 'Rebilly',
-                libraryTarget: 'window',
+                library: 'rebilly-js',
+                libraryTarget: 'umd',
                 umdNamedDefine: true
             },
             module: {
