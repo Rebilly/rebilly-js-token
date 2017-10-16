@@ -16,7 +16,7 @@ export default function leadSources() {
             .map(field => field.split('='))
             .filter(field => {
                 const [name] = field;
-                return utmFields.includes(name);
+                return utmFields.indexOf(name) > -1;
             })
             .reduce((data, field) => {
                 let [name, value = null] = field;

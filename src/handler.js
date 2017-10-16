@@ -113,7 +113,7 @@ export default class Handler {
             if (field.hasAttribute(this.attrKey)) {
                 const prop = field.getAttribute(this.attrKey);
                 if (prop !== null && prop !== '') {
-                    if (instrumentFields.includes(prop)) {
+                    if (instrumentFields.indexOf(prop) > -1) {
                         paymentInstrument[prop] = getValue(field);
                     }
                     else {
@@ -212,7 +212,7 @@ export default class Handler {
         };
         const fields = Object.keys(data.paymentInstrument);
         Object.keys(map).forEach(method => {
-            const match = fields.some(field => map[method].includes(field));
+            const match = fields.some(field => map[method].indexOf(field) > -1);
             if (match && !data.method) {
                 data.method = method;
                 console.log(`Rebilly detected "${method}" as the payment method`);
