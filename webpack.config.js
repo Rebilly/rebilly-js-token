@@ -9,9 +9,9 @@ module.exports = (env = {}) => {
             output: {
                 path: path.resolve(__dirname, './dist'),
                 filename: 'rebilly.js',
-                library: 'rebilly-js',
-                libraryTarget: 'umd',
-                umdNamedDefine: true
+                library: 'Rebilly',
+                libraryTarget: 'window',
+                libraryExport: 'default'
             },
             module: {
                 rules: [
