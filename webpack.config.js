@@ -14,7 +14,12 @@ module.exports = (env = {}) => {
                 umdNamedDefine: true
             },
             module: {
-                rules: [{test: /\.js$/, use: 'babel-loader'}]
+                rules: [
+                    {
+                        test: /\.js$/,
+                        use: 'babel-loader'
+                    }
+                ]
             },
             plugins: [
                 new webpack.optimize.UglifyJsPlugin({

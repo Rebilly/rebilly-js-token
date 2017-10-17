@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build:dev": "npm run clean && webpack --env=dev",
     "build:prod": "npm run clean && webpack --env=prod",
-    "prepublish": "npm run build:prod",
+    "prepublishOnly": "npm run build:prod",
     "test": "mocha --compilers js:babel-core/register --require babel-polyfill --colors ./test/*.spec.js",
     "test:watch": "npm run test -- --watch"
   },
@@ -45,5 +45,8 @@
     "rimraf": "^2.6.2",
     "webpack": "^3.6.0",
     "xhr": "^2.4.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
   }
 }
