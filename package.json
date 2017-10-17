@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build:dev": "npm run clean && webpack --env=dev",
     "build:prod": "npm run clean && webpack --env=prod",
-    "prepublishOnly": "npm run build:prod",
+    "prepare": "npm run build:prod",
     "test": "mocha --compilers js:babel-core/register --require babel-polyfill --colors ./test/*.spec.js",
     "test:watch": "npm run test -- --watch"
   },
