@@ -1,4 +1,5 @@
 import xhr from 'xhr';
+import {version} from '../package.json';
 
 /**
  * Handler for the creation of a payment token using the Rebilly API. Partially exposed by the main Rebilly factory.
@@ -149,7 +150,8 @@ export default class Handler {
             uri: this.endpoint,
             //json: true,
             headers: {
-                'reb-auth': this.authorization
+                'reb-auth': this.authorization,
+                'reb-api-consumer': `RebillySDK/JS-Token ${version}`
             }
         };
     }

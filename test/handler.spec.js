@@ -1,5 +1,6 @@
 import chai from 'chai';
 import Handler from '../src/handler';
+import {version} from '../package.json';
 
 const expect = chai.expect;
 
@@ -30,6 +31,7 @@ describe('when creating a handler', () => {
 
         expect(config.uri).to.be.equal(handler.endpoint);
         expect(config.headers['reb-auth']).to.be.equal(handler.authorization);
+        expect(config.headers['reb-api-consumer']).to.be.equal(`RebillySDK/JS-Token ${version}`);
         expect(config.body).to.be.equal(JSON.stringify(data));
     });
 
