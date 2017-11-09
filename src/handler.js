@@ -106,7 +106,7 @@ export default class Handler {
         const billingAddress = {};
         const getValue = (field) => {
             if (field.tagName.toLowerCase() === 'select') {
-                return field.options[field.selectedIndex].value
+                return field.options[field.selectedIndex].value;
             }
             return field.value;
         };
@@ -114,7 +114,7 @@ export default class Handler {
             if (field.hasAttribute(this.attrKey)) {
                 const prop = field.getAttribute(this.attrKey);
                 if (prop !== null && prop !== '') {
-                    const value = getValue(field);
+                    const value = String(getValue(field)).replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
                     if (value !== '') {
                         if (instrumentFields.indexOf(prop) > -1) {
                             paymentInstrument[prop] = value;
