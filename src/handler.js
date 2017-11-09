@@ -1,4 +1,5 @@
 import xhr from 'xhr';
+import {version} from '../package.json';
 
 /**
  * Handler for the creation of a payment token using the Rebilly API. Partially exposed by the main Rebilly factory.
@@ -105,7 +106,7 @@ export default class Handler {
         const billingAddress = {};
         const getValue = (field) => {
             if (field.tagName.toLowerCase() === 'select') {
-                return field.options[field.selectedIndex].value
+                return field.options[field.selectedIndex].value;
             }
             return field.value;
         };
@@ -113,16 +114,24 @@ export default class Handler {
             if (field.hasAttribute(this.attrKey)) {
                 const prop = field.getAttribute(this.attrKey);
                 if (prop !== null && prop !== '') {
-                    if (instrumentFields.indexOf(prop) > -1) {
-                        paymentInstrument[prop] = getValue(field);
-                    }
-                    else {
-                        billingAddress[prop] = getValue(field);
+                    const value = String(getValue(field)).replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+                    if (value !== '') {
+                        if (instrumentFields.indexOf(prop) > -1) {
+                            paymentInstrument[prop] = value;
+                        }
+                        else {
+                            billingAddress[prop] = value;
+                        }
                     }
                 }
             }
         });
-        return {paymentInstrument, billingAddress};
+
+        // if the payload objects are empty return null
+        return {
+            paymentInstrument: Object.keys(paymentInstrument).length ? paymentInstrument : null,
+            billingAddress: Object.keys(billingAddress).length ? billingAddress : null
+        };
     }
 
     /**
@@ -149,7 +158,8 @@ export default class Handler {
             uri: this.endpoint,
             //json: true,
             headers: {
-                'reb-auth': this.authorization
+                'reb-auth': this.authorization,
+                'reb-api-consumer': `RebillySDK/JS-Token ${version}`
             }
         };
     }
