@@ -114,16 +114,24 @@ export default class Handler {
             if (field.hasAttribute(this.attrKey)) {
                 const prop = field.getAttribute(this.attrKey);
                 if (prop !== null && prop !== '') {
-                    if (instrumentFields.indexOf(prop) > -1) {
-                        paymentInstrument[prop] = getValue(field);
-                    }
-                    else {
-                        billingAddress[prop] = getValue(field);
+                    const value = getValue(field);
+                    if (value !== '') {
+                        if (instrumentFields.indexOf(prop) > -1) {
+                            paymentInstrument[prop] = value;
+                        }
+                        else {
+                            billingAddress[prop] = value;
+                        }
                     }
                 }
             }
         });
-        return {paymentInstrument, billingAddress};
+
+        // if the payload objects are empty return null
+        return {
+            paymentInstrument: Object.keys(paymentInstrument).length ? paymentInstrument : null,
+            billingAddress: Object.keys(billingAddress).length ? billingAddress : null
+        };
     }
 
     /**
