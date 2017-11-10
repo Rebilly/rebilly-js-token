@@ -1,8 +1,8 @@
-# Token Fields
+# Token Properties
 
 The payment token can be generated for payment cards or bank accounts. Each method supports different fields that are not shared. This information is described in the [Rebilly API spec](https://rebilly.github.io/RebillyAPI/).
 
-The library requires you to define the payment instrument and billing address entities within the payment token. The method is optional and can be detected from the contents of the payment instrument values.
+The library requires you to define the payment instrument and billing address entities within the payment token. The `method` field is optional and can be detected from the contents of the payment instrument values.
 
 ## Fields
 
@@ -15,7 +15,7 @@ The library requires you to define the payment instrument and billing address en
 **Example**
 
 ```js
-{
+var payload = {
     method: 'payment-card' // entirely optional
     paymentInstrument: {
         pan: '4111111111111111',
@@ -27,12 +27,14 @@ The library requires you to define the payment instrument and billing address en
         firstName: 'John',
         lastName: 'Doe'
     }
-}
+};
+// using an object literal we will create the token
+Rebilly.createToken(payload, callback);
 ```
 
 ## Methods
 
-The two supported payment methods require different fields to be valid.
+The two supported payment methods require different fields to be valid. The fields listed below are **not optional**.
 
 ### Payment Card
 An object representing the payment card data.
