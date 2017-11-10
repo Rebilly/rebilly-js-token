@@ -92,6 +92,23 @@ var payload = {
 Rebilly.createToken(payload, callback);
 ```
 
+### Minimal Requirements
+
+To create a payment token you must supply Rebilly with a minimal amount of fields. This applies to both methods of building the payment instrument data.
+
+**Billing Address**
+
+The billing address requires `firstName` and `lastName`.
+
+**Payment Instrument**
+
+The payment instrument requires different fields based on the `method` defined. 
+
+- For method `payment-card`: `pan`, `expYear`, `expMonth` and `cvv`
+- For method `ach`: `routingNumber`, `accountNumber`, `accountType` and `bankName`
+
+> See [Token Fields][goto-fields] for more details.
+
 ### Defining the callback
 The callback function should be used to inject the token returned by the API into your form. Once submitted, use the value in conjunction with one of the server-side SDKs to create the customer.
 
@@ -138,3 +155,4 @@ When combined together the most basic version of the page would look like the fo
 
 [goto-auth]: #Authentication
 [goto-generate]: generating-signature.md
+[goto-fields]: token-fields.md
