@@ -39,6 +39,8 @@ markdown_extensions:
 pages:
   - Introduction: index.md
   - Getting Started: getting-started.md
+  - Defining a Token: token-fields.md
+  - Methods: methods.md
   - Generating a Signature: generating-signature.md
   - Validation Tools: validation-tools.md
   - Common Errors: common-errors.md
