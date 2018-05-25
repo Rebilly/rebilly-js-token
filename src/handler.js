@@ -8,6 +8,7 @@ export default class Handler {
     attrKey = 'data-rebilly';
     endpoint = null;
     authorization = null;
+    publishableKey = null;
     modules = [];
 
     constructor({modules, endpoint}) {
@@ -45,14 +46,25 @@ export default class Handler {
     }
 
     /**
+     * Set to use a publishable key instead of the previous method of `authorization`.
+     * Publishable keys are a type of API key that can be created in Rebilly to allow payment token related
+     * actions.
+     * @since 1.2.0
+     * @param key {string}
+     */
+    setPublishableKey(key = null) {
+        this.publishableKey = key;
+    }
+
+    /**
      * Create the token and return its value via the callback provided.
      * @param payload {Object|Node}
      * @param callback {Function}
      * @returns {Promise.<void>|boolean}
      */
     async createToken(payload, callback) {
-        if (this.authorization === null) {
-            console.error('Missing Rebilly authorization value');
+        if (this.authorization === null && this.publishableKey === null) {
+            console.error('Missing Rebilly authentication value');
             return false;
         }
         let data = {};
@@ -152,16 +164,21 @@ export default class Handler {
      * @returns {Object}
      */
     getConfig(data) {
-        return {
+        const config = {
             method: 'post',
             body: JSON.stringify(data),
             uri: this.endpoint,
             //json: true,
             headers: {
-                'reb-auth': this.authorization,
-                'reb-api-consumer': `RebillySDK/JS-Token ${version}`
-            }
+                'reb-api-consumer': `RebillySDK/JS-Token ${version}`,
+            },
         };
+        if (this.publishableKey !== null) {
+            config.headers['Authorization'] = `Bearer ${this.publishableKey}`;
+        } else {
+            config.headers['reb-auth'] = this.authorization;
+        }
+        return config;
     }
 
     /**
