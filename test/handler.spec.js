@@ -7,6 +7,7 @@ const expect = chai.expect;
 describe('when creating a handler', () => {
     const url = 'test-url';
     const handler = new Handler({endpoint: url, modules: []});
+    const auth = '1234567890';
 
     it('should set the correct default values', () => {
         expect(handler.endpoint).to.be.equal(url);
@@ -20,9 +21,11 @@ describe('when creating a handler', () => {
     });
 
     it('should allow the authorization to be modified', () => {
-        const auth = '1234567890';
+
         handler.setAuth(auth);
         expect(handler.authorization).to.be.equal(auth);
+        handler.setPublishableKey(auth);
+        expect(handler.publishableKey).to.be.equal(auth);
     });
 
     it('should generate the XHR configuration object', () => {
@@ -30,7 +33,9 @@ describe('when creating a handler', () => {
         const config = handler.getConfig(data);
 
         expect(config.uri).to.be.equal(handler.endpoint);
-        expect(config.headers['reb-auth']).to.be.equal(handler.authorization);
+        expect(config.headers['reb-auth']).to.be.undefined;
+        // auth set in previous test on handler instance
+        expect(config.headers['Authorization']).to.be.equal(`Bearer ${auth}`);
         expect(config.headers['reb-api-consumer']).to.be.equal(`RebillySDK/JS-Token ${version}`);
         expect(config.body).to.be.equal(JSON.stringify(data));
     });
@@ -90,7 +95,13 @@ describe('when creating a handler', () => {
 
     it('should not create a token if the authorization is missing', async () => {
         handler.setAuth(null);
-        await handler.createToken({}, (data) => {
+        handler.setPublishableKey(null);
+        const payload = {
+            paymentInstrument: {
+                pan: '4111111111111111',
+            },
+        };
+        await handler.createToken(payload, (data) => {
             // callback should not run
             expect(true).to.be.equal(false);
         });
