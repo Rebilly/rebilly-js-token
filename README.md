@@ -22,7 +22,7 @@ Add Rebilly.js to your page using the following CDN provider, preferably at the 
 #### Rebilly CDN
 
 ```html
-<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.5/rebilly.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.6/rebilly.js"></script>
 ```
 
 The library is then available in the global scope as `Rebilly`.
