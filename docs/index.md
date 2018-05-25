@@ -15,16 +15,10 @@ Add Rebilly.js to your page using one of the following CDN providers, preferably
 
 > Always use `HTTPS` when including the library.
 
-**UNPKG CDN**
+*Rebilly CDN*
 
 ```html
-<script src="https://unpkg.com/rebilly-js-token/dist/rebilly.js"></script>
-```
-
-**jsDelivr CDN**
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/rebilly-js-token/dist/rebilly.min.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.4/rebilly.js"></script>
 ```
 
 ## Semver
