@@ -7,20 +7,14 @@ The library must be inserted in the page you will use to handle payment instrume
 
 ## Including Rebilly.js
 
-Add Rebilly.js to your page using one of the following CDN providers, preferably at the bottom before the `</body>`. 
+Add Rebilly.js to your page using the following CDN provider, preferably at the bottom before the `</body>`.
 
 > Always use `HTTPS` when including the library.
 
-**UNPKG CDN**
+*Rebilly CDN*
 
 ```html
-<script src="https://unpkg.com/rebilly-js-token/dist/rebilly.js"></script>
-```
-
-**jsDelivr CDN**
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/rebilly-js-token/dist/rebilly.min.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.5/rebilly.js"></script>
 ```
 
 The library is then available in the global scope as `:::js Rebilly`.
