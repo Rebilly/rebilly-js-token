@@ -41,7 +41,7 @@ pages:
   - Getting Started: getting-started.md
   - Defining a Token: token-fields.md
   - Methods: methods.md
-  - Generating a Signature: generating-signature.md
+  - Generating a publishable API key: generating-api-key.md
   - Validation Tools: validation-tools.md
   - Common Errors: common-errors.md
   - License: license.md
