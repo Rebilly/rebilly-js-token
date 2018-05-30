@@ -18,7 +18,7 @@ Add Rebilly.js to your page using one of the following CDN providers, preferably
 *Rebilly CDN*
 
 ```html
-<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.4/rebilly.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.2.1/rebilly.js"></script>
 ```
 
 ## Semver

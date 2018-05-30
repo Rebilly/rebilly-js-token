@@ -14,7 +14,7 @@ Add Rebilly.js to your page using the following CDN provider, preferably at the 
 *Rebilly CDN*
 
 ```html
-<script src="https://cdn.rebilly.com/rebilly-js-token@1.1.4/rebilly.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.2.1/rebilly.js"></script>
 ```
 
 The library is then available in the global scope as `:::js Rebilly`.
@@ -144,6 +144,6 @@ When combined together the most basic version of the page would look like the fo
 <script src="https://gist.github.com/Teknologica/6d814f041428e5255df07cd2c60d1334.js"></script>
 
 [goto-auth]: #Authentication
-[goto-generate]: generating-signature.md
+[goto-generate]: generating-api-key.md
 [goto-fields]: token-fields.md
 [1]: https://app.rebilly.com/api-keys/add
