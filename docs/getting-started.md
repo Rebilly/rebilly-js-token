@@ -77,6 +77,11 @@ var payload = {
         expYear: '2022',
         expMonth: '12',
         cvv: '123'
+    },
+    // the first/last name is required
+    billingAddress: {
+        firstName: 'John',
+        lastName: 'Doe'
     }
 };
 Rebilly.createToken(payload, callback);
