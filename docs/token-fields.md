@@ -61,6 +61,87 @@ var payload = {
 Rebilly.createToken(payload, callback);
 ```
 
+### Billing Address
+
+<p>Please note that the <code>firstName</code> and <code>lastName</code> values are required to create a payment token. Any other billing address fields are optional.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="vertical-align:top">
+                firstName<br><sub>required</sub>
+            </td>
+            <td>The customer's first name. This field is required to generate a payment token.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                lastName<br><sub>required</sub>
+            </td>
+            <td>The customer's last name. This field is required to generate a payment token.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                organization
+            </td>
+            <td>The customer's organization value.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                address
+            </td>
+            <td>The main address field.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                address2
+            </td>
+            <td>The secondary address field.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                city
+            </td>
+            <td>The customer's city.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                region
+            </td>
+            <td>The customer's province or region.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                country
+            </td>
+            <td>The customer's country. This value is a ISO two-letter code format. e.g. <code>US</code>, <code>CA</code></td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                postalCode
+            </td>
+            <td>The customer's ZIP or postal code.</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                phoneNumbers
+            </td>
+            <td>An array of objects representing phone numbers. Each item must include a <code>label</code> and <code>value</code></td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                emails
+            </td>
+            <td>An array of objects representing emails. Each item must include a <code>label</code> and <code>value</code></td>
+        </tr>
+    </tbody>
+</table>
+
 ## Methods
 
 The two supported payment methods require different fields to be valid. The fields listed below are **not optional**.
