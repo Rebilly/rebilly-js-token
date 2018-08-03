@@ -141,7 +141,7 @@ const customer = {
      * @returns {boolean}
      */
     postalCode(code) {
-        return validateString(code, `^[a-z0-9-\\s]+$`, 10);
+        return validateString(code, `^[A-Za-z0-9-\\s]+$`, 10);
     },
     /**
      * Validates the phone number
