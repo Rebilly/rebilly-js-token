@@ -1,6 +1,6 @@
 {
   "name": "rebilly-js-token",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Rebilly payment token library",
   "main": "./dist/rebilly.js",
   "scripts": {
