@@ -118,6 +118,7 @@ describe('when validating billing address data', () => {
         expect(validate.customer.postalCode('h1n1n1')).to.be.equal(true);
         expect(validate.customer.postalCode('h1n-1n1')).to.be.equal(true);
         expect(validate.customer.postalCode('h2b 4g6')).to.be.equal(true);
+        expect(validate.customer.postalCode('H1N 1n1')).to.be.equal(true);
         // invalid character
         expect(validate.customer.postalCode('h2b+4g6')).to.be.equal(false);
     });
