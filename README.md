@@ -34,8 +34,7 @@ After including the library into your page, you must authenticate your API reque
 Once included in your checkout page, authenticate your token requests using a publishable API key [generated in Rebilly](https://app.rebilly.com/api-keys/add).
 
 ```js
-// arguments: payload, callback, extraData
-Rebilly.createToken(Node|Object, Function[, Object])
+Rebilly.setPublishableKey('pk_live_...');
 ```
  
 ### Creating a token
