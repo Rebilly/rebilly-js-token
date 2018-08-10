@@ -15,7 +15,7 @@ export default function Rebilly({modules = []} = {}) {
         setEndpoint: (url) => handler.setEndpoint(url),
         setAuth: (auth) => handler.setAuth(auth),
         setPublishableKey: (key) => handler.setPublishableKey(key),
-        createToken: (payload, callback) => handler.createToken(payload, callback),
+        createToken: (payload, callback, extraData = {}) => handler.createToken(payload, callback, extraData),
         validate
     };
 }
