@@ -16,10 +16,11 @@ Rebilly.setPublishableKey('pk_live_...');
 ```
 
 ## createToken
-<div class="method"><code><strong>createToken</strong>(<span class="prop">payload</span>, <span class="prop">callback</span>)</code></div>
+<div class="method"><code><strong>createToken</strong>(<span class="prop">payload</span>, <span class="prop">callback</span>, <span class="prop">extraData</span><span class="optional" title="optional">opt</span>)</code></div>
 
 Trigger an API call to Rebilly that will generate a token for the payment instrument information provided in the `payload`. Once the request completes, the `callback` function is called with the response. 
 
+Optionally you can also include an object literal defining `extraData` to combine to the main payload. This is useful when using a form to include information about the lead source.
 
 **Example**
 

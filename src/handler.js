@@ -30,6 +30,24 @@ export default class Handler {
     }
 
     /**
+     * Combine the token data with the module payloads while allowing
+     * some keys to be overwritten (e.g. lead source).
+     * @param data
+     * @returns {Object}
+     */
+    async combineData(data) {
+        const moduleData = await this.processModules();
+        if (data.leadSource) {
+            // allow overwriting of leadSource
+            delete moduleData.leadSource;
+        }
+        return {
+            ...data,
+            ...moduleData,
+        };
+    }
+
+    /**
      * Overwrite the default endpoint URL with another value.
      * @param url {string}
      */
@@ -60,9 +78,10 @@ export default class Handler {
      * Create the token and return its value via the callback provided.
      * @param payload {Object|Node}
      * @param callback {Function}
+     * @param extraData {Object?}
      * @returns {Promise.<void>|boolean}
      */
-    async createToken(payload, callback) {
+    async createToken(payload, callback, extraData = {}) {
         if (this.authorization === null && this.publishableKey === null) {
             console.error('Missing Rebilly authentication value');
             return false;
@@ -84,8 +103,7 @@ export default class Handler {
         else {
             data = this.serializeForm(payload);
         }
-        const moduleData = await this.processModules();
-        data = {...data, ...moduleData};
+        data = await this.combineData({...data, ...extraData});
         // convert legacy method values if present
         if (data.method) {
             this.convertLegacyMethods(data);
@@ -98,7 +116,7 @@ export default class Handler {
             console.error('Missing method and payment instrument data');
             return false;
         }
-        xhr(this.getConfig(data), this.handleResponse(callback))
+        xhr(this.getConfig(data), this.handleResponse(callback));
     }
 
     /**
@@ -111,7 +129,7 @@ export default class Handler {
             // payment card
             'pan', 'expMonth', 'expYear', 'cvv',
             // ach
-            'routingNumber', 'accountNumber', 'accountType'
+            'routingNumber', 'accountNumber', 'accountType',
         ];
         const fields = this.getFormFields(form);
         const paymentInstrument = {};
@@ -142,7 +160,7 @@ export default class Handler {
         // if the payload objects are empty return null
         return {
             paymentInstrument: Object.keys(paymentInstrument).length ? paymentInstrument : null,
-            billingAddress: Object.keys(billingAddress).length ? billingAddress : null
+            billingAddress: Object.keys(billingAddress).length ? billingAddress : null,
         };
     }
 
@@ -154,8 +172,8 @@ export default class Handler {
     getFormFields(form) {
         return [
             ...Array.from(form.getElementsByTagName('input')),
-            ...Array.from(form.getElementsByTagName('select'))
-        ]
+            ...Array.from(form.getElementsByTagName('select')),
+        ];
     }
 
     /**
@@ -193,7 +211,7 @@ export default class Handler {
                 status: response.statusCode,
                 error: false,
                 data: null,
-                message: 'success'
+                message: 'success',
             };
             // error prior to running the XHR request
             if (error) {
@@ -209,7 +227,7 @@ export default class Handler {
                 }
             }
             callback(params);
-        }
+        };
     }
 
     /**
@@ -219,7 +237,7 @@ export default class Handler {
     convertLegacyMethods(data) {
         const map = {
             'payment_card': 'payment-card',
-            'bank_account': 'ach'
+            'bank_account': 'ach',
         };
         Object.keys(map).forEach(key => {
             if (data.method === key) {
@@ -235,7 +253,7 @@ export default class Handler {
     detectMethod(data) {
         const map = {
             'payment-card': ['pan', 'expMonth', 'expYear', 'cvv'],
-            'ach': ['routingNumber', 'accountNumber', 'accountType']
+            'ach': ['routingNumber', 'accountNumber', 'accountType'],
         };
         const fields = Object.keys(data.paymentInstrument);
         Object.keys(map).forEach(method => {

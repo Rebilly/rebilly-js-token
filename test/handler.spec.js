@@ -1,4 +1,5 @@
 import chai from 'chai';
+import sinon from 'sinon';
 import Handler from '../src/handler';
 import {version} from '../package.json';
 
@@ -21,7 +22,6 @@ describe('when creating a handler', () => {
     });
 
     it('should allow the authorization to be modified', () => {
-
         handler.setAuth(auth);
         expect(handler.authorization).to.be.equal(auth);
         handler.setPublishableKey(auth);
@@ -65,8 +65,8 @@ describe('when creating a handler', () => {
     it('should detect the correct payment method from the payment instrument fields if missing', () => {
         const data = {
             paymentInstrument: {
-                pan: '4111111111111111'
-            }
+                pan: '4111111111111111',
+            },
         };
         handler.detectMethod(data);
         expect(data.method).to.be.equal('payment-card');
@@ -85,7 +85,7 @@ describe('when creating a handler', () => {
             () => ({foo: 'bar'}),
             () => new Promise((resolve) => {
                 setTimeout(() => resolve({hello: 'world'}), 100);
-            })
+            }),
         ];
         const handler = new Handler({modules, endpoint: url});
         const data = await handler.processModules();
@@ -109,11 +109,34 @@ describe('when creating a handler', () => {
     });
 
     it('should not create a token if the payload is missing data', async () => {
-        handler.setAuth('123456789');
+        handler.setAuth(auth);
         await handler.createToken({bad: 'data'}, () => {
             // callback should not run
             expect(true).to.be.equal(false);
         });
         expect(true).to.be.equal(true);
+    });
+
+    it('should combine module and token data without conflicts', async () => {
+        const data = {
+            paymentInstrument: {
+                pan: '4111111111111111',
+            },
+            leadSource: {
+                campaign: 'custom',
+            },
+            fingerprint: 'custom',
+        };
+        sinon.stub(handler, 'processModules')
+            .returns({
+                leadSource: {
+                    campaign: 'module',
+                },
+                fingerprint: 'module',
+            });
+        const result = await handler.combineData(data);
+        expect(result.fingerprint).to.equal('module');
+        expect(result.leadSource.campaign).to.equal('custom');
+        expect(result.paymentInstrument.pan).to.equal(data.paymentInstrument.pan);
     });
 });

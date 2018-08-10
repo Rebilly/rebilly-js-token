@@ -14,7 +14,7 @@ Add Rebilly.js to your page using the following CDN provider, preferably at the 
 *Rebilly CDN*
 
 ```html
-<script src="https://cdn.rebilly.com/rebilly-js-token@1.3.0/rebilly.js"></script>
+<script src="https://cdn.rebilly.com/rebilly-js-token@1.4.0/rebilly.js"></script>
 ```
 
 The library is then available in the global scope as `:::js Rebilly`.
@@ -31,11 +31,14 @@ Rebilly.setPublishableKey('pk_live_...');
 ## Creating a token
 To create a token you must provide two parameters: the form or object literal with the payment instrument data (payment card or bank account) and a callback function that will receive the resulting token from the Rebilly API.
 
+Optionally you can also include an object literal defining `extraData` to combine to the main payload. This is useful when using a form to include information about the lead source.
+
 !!! tip "Form Submission"
     When creating a token, prevent the default submission of the form until a value is returned by the API and injected into your page.
 
 ```js
-Rebilly.createToken(Node|Object, Function)
+// arguments: payload, callback, extraData
+Rebilly.createToken(Node|Object, Function[, Object])
 ```
 
 ### Building the payment instrument data
