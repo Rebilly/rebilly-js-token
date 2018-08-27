@@ -48,9 +48,9 @@ describe('when creating a handler', () => {
         errorHandler({message: 'error'}, {rawRequest: 123, statusCode: 422}, null);
         const successHandler = handler.handleResponse((data) => {
             expect(data.error).to.be.equal(false);
-            expect(data.data).to.be.deep.equal(JSON.stringify({hello: 'world'}));
+            expect(data.data).to.be.deep.equal({hello: 'world'});
         });
-        successHandler(null, {rawRequest: 123, statusCode: 201}, JSON.stringify({hello: 'world'}));
+        successHandler(null, {rawRequest: 123, statusCode: 201}, {hello: 'world'});
     });
 
     it('should convert legacy methods to their new equivalents', () => {
