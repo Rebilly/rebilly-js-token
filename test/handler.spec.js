@@ -37,7 +37,7 @@ describe('when creating a handler', () => {
         // auth set in previous test on handler instance
         expect(config.headers['Authorization']).to.be.equal(`Bearer ${auth}`);
         expect(config.headers['reb-api-consumer']).to.be.equal(`RebillySDK/JS-Token ${version}`);
-        expect(config.body).to.be.equal(JSON.stringify(data));
+        expect(config.body).to.be.deep.equal(data);
     });
 
     it('handle the XHR response', () => {
@@ -50,7 +50,7 @@ describe('when creating a handler', () => {
             expect(data.error).to.be.equal(false);
             expect(data.data).to.be.deep.equal({hello: 'world'});
         });
-        successHandler(null, {rawRequest: 123, statusCode: 201}, JSON.stringify({hello: 'world'}));
+        successHandler(null, {rawRequest: 123, statusCode: 201}, {hello: 'world'});
     });
 
     it('should convert legacy methods to their new equivalents', () => {
