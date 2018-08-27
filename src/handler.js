@@ -184,9 +184,9 @@ export default class Handler {
     getConfig(data) {
         const config = {
             method: 'post',
-            body: JSON.stringify(data),
+            body: data,
             uri: this.endpoint,
-            //json: true,
+            json: true,
             headers: {
                 'reb-api-consumer': `RebillySDK/JS-Token ${version}`,
             },
@@ -219,7 +219,7 @@ export default class Handler {
                 params.message = error.message;
             }
             else {
-                params.data = JSON.parse(body);
+                params.data = body;
                 // check if the status code indicates an error
                 if (response.statusCode !== 201) {
                     params.error = true;
