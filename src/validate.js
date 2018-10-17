@@ -133,7 +133,7 @@ const customer = {
      * @returns {boolean}
      */
     address(address) {
-        return validateUnicodeString(address, `0-9\\s,'.#\\/`, 60);
+        return validateUnicodeString(address, `0-9\\s,'.#\\/-`, 60);
     },
     /**
      * Validates the postal code
