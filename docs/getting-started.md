@@ -151,7 +151,7 @@ Rebilly.setEndpoint('https://api-sandbox.rebilly.com/v2.1/tokens');
 When combined together the most basic version of the page would look like the following example:
 <script src="https://gist.github.com/Teknologica/6d814f041428e5255df07cd2c60d1334.js"></script>
 
-[goto-auth]: #Authentication
+[goto-auth]: https://rebilly.github.io/RebillyAPI/#section/Authentication
 [goto-generate]: generating-api-key.md
 [goto-fields]: token-fields.md
 [1]: https://app.rebilly.com/api-keys/add
