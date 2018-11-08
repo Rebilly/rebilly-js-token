@@ -3,7 +3,6 @@
 Rebilly.js powers your checkout form and removes the need to send sensitive customer information directly to your servers. Use the library to generate payment tokens to reduce the scope of PCI DSS compliance.
 
 [![npm](https://img.shields.io/npm/v/rebilly-js-token.svg)](https://www.npmjs.com/package/rebilly-js-token)
-[![Build Status](https://travis-ci.org/Rebilly/rebilly-js-token.svg?branch=master)](https://travis-ci.org/Rebilly/rebilly-js-token)
 [![devDependencies Status](https://david-dm.org/Rebilly/rebilly-js-token/dev-status.svg)](https://david-dm.org/Rebilly/rebilly-js-token?type=dev)
 
 ### Rebilly API Spec
