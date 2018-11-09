@@ -37,4 +37,4 @@ The following headers must be supported over your network:
 
 [goto-cors]: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 [goto-headers]: #missing-cors-headers
-[goto-endpoint]: /getting-started/#changing-the-endpoint
+[goto-endpoint]: getting-started.md#changing-the-endpoint
