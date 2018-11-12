@@ -19,5 +19,5 @@ Rebilly.setPublishableKey('pk_live_...');
 !!! warning "Deprecation of `setAuth`"
     In previous versions of the library the preferred method of authentication was to generate a private signature using a private API key and `Rebilly.setAuth`. This method has been deprecated in favor of publishable API keys.
 
-[goto-create]: /methods#setpublishablekey
+[goto-create]: methods.md#setpublishablekey
 [1]: https://app.rebilly.com/api-keys/add

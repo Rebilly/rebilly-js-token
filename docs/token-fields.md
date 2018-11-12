@@ -189,4 +189,4 @@ paymentInstrument: {
 },
 ```
 
-[goto-create]: /methods/#createtoken
+[goto-create]: methods.md#createtoken
