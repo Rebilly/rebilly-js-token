@@ -1,10 +1,14 @@
-# Rebilly JS Token Library
+# Rebilly JS Token Library (Deprecated)
 
 Rebilly.js powers your checkout form and removes the need to send sensitive customer information directly to your servers. Use the library to generate payment tokens to reduce the scope of PCI DSS compliance.
 
 [![npm](https://img.shields.io/npm/v/rebilly-js-token.svg)](https://www.npmjs.com/package/rebilly-js-token)
 [![devDependencies Status](https://david-dm.org/Rebilly/rebilly-js-token/dev-status.svg)](https://david-dm.org/Rebilly/rebilly-js-token?type=dev)
 
+# Deprecation Notice
+This library is deprecated in favor of [FramePay](https://rebilly.github.io/framepay-docs/), a tool that allows you to build your checkout flow by offloading strict PCI Compliance requirements directly to Rebilly while maintaining the same look and feel your customers are used to.
+
+---
 
 ### Rebilly API Spec
 The library uses the payment token endpoint from the Rebilly API. See the [Rebilly API spec](https://rebilly.github.io/RebillyAPI/) for more details.
